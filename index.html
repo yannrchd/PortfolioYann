@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index – Yann RICHARD</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="dropdown-menu" id="menu-container"></div>
+  <header>
+    <h1 class="site-title">Yann RICHARD</h1>
+    <p class="subtitle">Cadreur • Photographe • Captation & Événementiel</p>
+  </header>
+  <section>
+    <div class="about">
+      <p>
+        Étudiant en Cinéma Audiovisuel à 3iS, je me spécialise dans l'image photo et vidéo.
+        J'interviens en captation d'événements, en portraits, en photographie automobile
+        et en reportage. Habitué au travail rapide et mobile, je privilégie une approche
+        professionnelle centrée sur la fiabilité, la maîtrise technique et la cohérence visuelle.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION CV VIDÉO -->
+<section>
+  <h2>CV Vidéo</h2>
+  <div class="video-container">
+    <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
+      <source src="videos/cvvideo.mp4" type="video/mp4" />
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+  </div>
+</section>
+
+
+
+  <section>
+    <h2>Catégories</h2>
+    <div class="categories">
+      <div class="cat-card" onclick="window.location.href='portraits.html';">
+        <img src="photos/cover/portrait-cover.jpg" alt="Portraits" />
+        <div class="overlay"></div>
+        <div class="cat-name">Portraits</div>
+      </div>
+      <div class="cat-card" onclick="window.location.href='automobile.html';">
+        <img src="photos/cover/automobile-cover.jpg" alt="Automobile" />
+        <div class="overlay"></div>
+        <div class="cat-name">Automobile</div>
+      </div>
+      <div class="cat-card" onclick="window.location.href='concert.html';">
+        <img src="photos/cover/concert-cover.jpg" alt="Concert" />
+        <div class="overlay"></div>
+        <div class="cat-name">Concert</div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>Services</h2>
+    <div class="services">
+      <p><strong>Vidéo :</strong> captation d'événements, reportage, formats courts.</p>
+      <p><strong>Cadre :</strong> caméra, stabilisateur, multicam.</p>
+      <p><strong>Photographie :</strong> portraits, événements, automobile, reportage.</p>
+      <p><strong>Post-production :</strong> montage court, tri & retouche photo.</p>
+    </div>
+  </section>
+  <script src="keyboard-control.js"></script>
+  <script src="menu.js"></script>
+  <script src="lightbox.js"></script>
+  <script src="footer.js"></script>
+  <script src="video-light.js"></script>
+  <script src="media-protect.js"></script>
+</body>
+</html>

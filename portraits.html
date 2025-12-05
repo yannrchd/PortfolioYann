@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portraits – Yann RICHARD</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="dropdown-menu" id="menu-container"></div>
+  <header>
+    <h1 class="site-title">Portraits</h1>
+    <p class="subtitle">Découvrez mes différents portraits</p>
+  </header>
+
+  <section>
+    <h2>Mes Portraits</h2>
+    <div class="categories">
+      <div class="cat-card" onclick="window.location.href='ethan.html';">
+        <img src="photos/cover/ethan-cover.jpg" alt="Ethan" />
+        <div class="overlay"></div>
+        <div class="cat-name">Ethan</div>
+      </div>
+      <div class="cat-card" onclick="window.location.href='enzo.html';">
+        <img src="photos/cover/enzo-cover.jpg" alt="Enzo" />
+        <div class="overlay"></div>
+        <div class="cat-name">Enzo</div>
+      </div>
+      <!-- Ajoutez d'autres portraits ici -->
+    </div>
+  </section>
+
+  <script src="menu.js"></script>
+  <script src="lightbox.js"></script>
+  <script src="footer.js"></script>
+  <script src="keyboard-control.js"></script>
+  <script src="media-protect.js"></script>
+</body>
+</html>
