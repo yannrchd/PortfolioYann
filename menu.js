@@ -1,64 +1,62 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const menuHTML = `
-    <div class="menu-wrapper">
-      <span class="menu-toggle">⋯</span>
+// menu.js
+const menuContainer = document.getElementById('menu-container');
 
-      <div class="menu">
+menuContainer.innerHTML = `
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li class="menu-item" data-menu="portraits">
+      <a href="#">Portraits</a>
+      <ul class="submenu">
+        <li><a href="portraits-ethan.html">Ethan</a></li>
+        <li><a href="portraits-enzo.html">Enzo</a></li>
+      </ul>
+    </li>
+    <li class="menu-item" data-menu="automobiles">
+      <a href="#">Automobiles</a>
+      <ul class="submenu">
+        <li><a href="japancar.html">Japancar</a></li>
+        <li><a href="divers-auto.html">Divers</a></li>
+      </ul>
+    </li>
+    <li class="menu-item" data-menu="concerts">
+      <a href="#">Concerts</a>
+      <ul class="submenu">
+        <li><a href="lajava.html">La Java</a></li>
+      </ul>
+    </li>
+  </ul>
+`;
 
-        <div class="menu-item" data-target="portraits">
-          <a class="menu-link" href="portraits.html">Portraits</a>
-        </div>
-        <div class="submenu" id="portraits">
-          <a href="ethan.html">Ethan</a>
-          <a href="enzo.html">Enzo</a>
-        </div>
+// Gestion de l'ouverture/fermeture des sous-menus sur mobile
+const menuItems = menuContainer.querySelectorAll('.menu-item');
 
-        <div class="menu-item" data-target="auto">
-          <a class="menu-link" href="automobile.html">Automobile</a>
-        </div>
-        <div class="submenu" id="auto">
-          <a href="japancar.html">Japancar</a>
-          <a href="divers.html">Divers</a>
-        </div>
+menuItems.forEach(item => {
+  const link = item.querySelector('a');
+  const submenu = item.querySelector('.submenu');
 
-        <div class="menu-item" data-target="concert">
-          <a class="menu-link" href="concerts.html">Concerts</a>
-        </div>
-        <div class="submenu" id="concert">
-          <a href="lajava.html">La Java</a>
-        </div>
+  let opened = false;
 
-      </div>
-    </div>
-  `;
+  link.addEventListener('click', e => {
+    e.preventDefault();
 
-  const container = document.getElementById("menu-container");
-  container.innerHTML = menuHTML;
+    // Si le sous-menu est déjà ouvert, naviguer vers la page principale
+    if (opened) {
+      window.location.href = link.href;
+      return;
+    }
 
-  const toggleBtn = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
-
-  toggleBtn.addEventListener("click", () => {
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-  });
-
-  // Gestion des catégories cliquables (double fonction)
-  document.querySelectorAll(".menu-item").forEach(item => {
-    let opened = false; // mémorise si on a déjà ouvert le sous-menu
-
-    item.addEventListener("click", e => {
-      e.preventDefault();
-      const target = item.getAttribute("data-target");
-      const submenu = document.getElementById(target);
-
-      if (!opened) {
-        // 1er clic : ouvrir le sous-menu
-        submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
-        opened = true;
-      } else {
-        // 2ème clic : aller à la page
-        window.location.href = item.querySelector("a").href;
-      }
+    // Fermer tous les sous-menus ouverts
+    menuItems.forEach(i => {
+      const sm = i.querySelector('.submenu');
+      if (sm && sm !== submenu) sm.style.display = 'none';
+      i.dataset.opened = false;
     });
+
+    // Ouvrir le sous-menu actuel
+    if (submenu) {
+      submenu.style.display = 'block';
+      opened = true;
+      item.dataset.opened = true;
+    }
   });
 });
