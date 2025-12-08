@@ -1,0 +1,63 @@
+/* Bouton du menu */
+.menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+  user-select: none;
+}
+
+/* Conteneur du menu */
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  color: white;
+  padding: 15px;
+  z-index: 999;
+}
+
+/* Menu caché au début */
+.menu {
+  display: none;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+/* Catégories */
+.menu-item {
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Sous-menus */
+.submenu {
+  display: none;
+  flex-direction: column;
+  padding-left: 15px;
+}
+
+.submenu a {
+  color: #ccc;
+  padding: 6px 0;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.submenu a:hover {
+  color: white;
+}
+
+/* Lien principal */
+.menu-link {
+  color: white;
+  text-decoration: none;
+}
+
+/* Espace sous le menu pour éviter qu’il cache le contenu */
+body {
+  padding-top: 70px;
+}
