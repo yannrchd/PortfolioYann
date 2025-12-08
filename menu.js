@@ -12,14 +12,14 @@ menuContainer.innerHTML = `
       </ul>
     </li>
     <li class="menu-item" data-menu="automobiles">
-      <a href="automobiles.html">Automobiles</a>
+      <a href="automobile.html">Automobiles</a>
       <ul class="submenu">
         <li><a href="japancar.html">Japancar</a></li>
         <li><a href="divers-auto.html">Divers</a></li>
       </ul>
     </li>
     <li class="menu-item" data-menu="concerts">
-      <a href="concerts.html">Concerts</a>
+      <a href="concert.html">Concerts</a>
       <ul class="submenu">
         <li><a href="lajava.html">La Java</a></li>
       </ul>
