@@ -1,57 +1,109 @@
-// menu.js
 const menuContainer = document.getElementById('menu-container');
 
-menuContainer.innerHTML = `
-  <ul>
-    <li><a href="index.html">Accueil</a></li>
-    <li class="menu-item" data-menu="portraits">
-      <a href="portraits.html">Portraits</a>
-      <ul class="submenu">
-        <li><a href="portraits-ethan.html">Ethan</a></li>
-        <li><a href="portraits-enzo.html">Enzo</a></li>
-      </ul>
-    </li>
-    <li class="menu-item" data-menu="automobiles">
-      <a href="automobile.html">Automobiles</a>
-      <ul class="submenu">
-        <li><a href="japancar.html">Japancar</a></li>
-        <li><a href="divers-auto.html">Divers</a></li>
-      </ul>
-    </li>
-    <li class="menu-item" data-menu="concerts">
-      <a href="concert.html">Concerts</a>
-      <ul class="submenu">
-        <li><a href="lajava.html">La Java</a></li>
-      </ul>
-    </li>
-  </ul>
-`;
+// Création du bouton toggle
+const toggleButton = document.createElement('div');
+toggleButton.id = 'menu-toggle';
+toggleButton.textContent = '...';
+menuContainer.appendChild(toggleButton);
 
-// Gestion de l'ouverture/fermeture des sous-menus sur mobile
-const menuItems = menuContainer.querySelectorAll('.menu-item');
+// Menu principal
+const menuData = [
+  { name: 'Accueil', link: 'index.html' },
+  {
+    name: 'Portraits',
+    link: 'portraits.html',
+    submenu: [
+      { name: 'Ethan', link: 'ethan.html' },
+      { name: 'Enzo', link: 'enzo.html' }
+    ]
+  },
+  {
+    name: 'Automobiles',
+    link: 'automobiles.html',
+    submenu: [
+      { name: 'Japancar', link: 'japancar.html' },
+      { name: 'Divers', link: 'divers.html' }
+    ]
+  },
+  {
+    name: 'Concerts',
+    link: 'concerts.html',
+    submenu: [
+      { name: 'La Java', link: 'lajava.html' }
+    ]
+  }
+];
 
-menuItems.forEach(item => {
-  const link = item.querySelector('a');
-  const submenu = item.querySelector('.submenu');
+// Fonction pour créer les menus
+function createMenu(data) {
+  const ul = document.createElement('ul');
 
-  let opened = false;
+  data.forEach(item => {
+    const li = document.createElement('li');
+    li.classList.add('menu-item');
 
-  link.addEventListener('click', e => {
-    // Si le sous-menu existe et que c'est le premier clic, on ouvre juste le sous-menu
-    if (submenu && !opened) {
-      e.preventDefault();
+    const span = document.createElement('span');
+    span.textContent = item.name;
+    li.appendChild(span);
 
-      // Fermer tous les autres sous-menus
-      menuItems.forEach(i => {
-        const sm = i.querySelector('.submenu');
-        if (sm && sm !== submenu) sm.style.display = 'none';
-        i.dataset.opened = false;
+    if (item.submenu) {
+      const submenuUl = document.createElement('ul');
+      submenuUl.classList.add('submenu');
+
+      item.submenu.forEach(sub => {
+        const subLi = document.createElement('li');
+        subLi.textContent = sub.name;
+        subLi.addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = sub.link;
+        });
+        submenuUl.appendChild(subLi);
       });
 
-      submenu.style.display = 'block';
-      opened = true;
-      item.dataset.opened = true;
-    } 
-    // Sinon, naviguer normalement vers la page
+      li.appendChild(submenuUl);
+
+      // Premier clic = afficher sous-menu, second clic = rediriger
+      li.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        const isOpen = li.classList.contains('open');
+        if (isOpen) {
+          window.location.href = item.link; // redirection si déjà ouvert
+        } else {
+          li.classList.add('open');
+
+          // fermer les autres sous-menus
+          document.querySelectorAll('.menu-item').forEach(other => {
+            if (other !== li) {
+              other.classList.remove('open');
+            }
+          });
+        }
+      });
+    } else {
+      li.addEventListener('click', () => {
+        window.location.href = item.link;
+      });
+    }
+
+    ul.appendChild(li);
   });
+
+  return ul;
+}
+
+// Crée le menu et l’ajoute
+const menuUl = createMenu(menuData);
+menuContainer.appendChild(menuUl);
+
+// Toggle menu principal
+toggleButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  menuContainer.classList.toggle('open');
+});
+
+// Fermer le menu si clic ailleurs
+document.addEventListener('click', () => {
+  menuContainer.classList.remove('open');
+  document.querySelectorAll('.menu-item').forEach(li => li.classList.remove('open'));
 });

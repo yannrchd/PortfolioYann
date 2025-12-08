@@ -1,80 +1,80 @@
-/* menu.css */
-
-/* Menu principal */
 #menu-container {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 2000;
   font-family: "Inter", sans-serif;
+}
+
+#menu-toggle {
+  width: 40px;
+  height: 40px;
   background-color: #1a1a1a;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-/* Liste principale */
-#menu-container ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Li principaux */
-#menu-container > ul > li {
-  position: relative;
-  margin-bottom: 6px;
-}
-
-/* Liens */
-#menu-container a {
-  display: block;
   color: #fff;
-  text-decoration: none;
-  padding: 10px 16px;
   border-radius: 6px;
-  transition: background 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  transition: background 0.3s;
 }
 
-/* Hover / active */
-#menu-container a:hover {
+#menu-toggle:hover {
   background-color: #333;
-  transform: scale(1.05);
 }
 
-/* Sous-menus */
+/* Menu principal */
+#menu-container ul {
+  display: none;
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  min-width: 180px;
+}
+
+#menu-container.open > ul {
+  display: block;
+}
+
+.menu-item {
+  position: relative;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+.menu-item span {
+  display: block;
+}
+
+.menu-item:hover {
+  background-color: #333;
+}
+
 .submenu {
   display: none;
   list-style: none;
-  padding-left: 10px;
-  margin-top: 4px;
-  border-left: 2px solid #555;
+  margin: 5px 0 5px 10px;
+  padding: 0;
 }
 
-/* Sous-menus li */
-.submenu li a {
-  padding: 8px 16px;
-  font-size: 0.95em;
-}
-
-/* Effet mobile : clic pour ouvrir */
-.menu-item[data-opened="true"] > .submenu {
+.menu-item.open > .submenu {
   display: block;
 }
 
-/* Responsive : réduire taille sur mobile */
-@media (max-width: 768px) {
-  #menu-container {
-    top: 10px;
-    left: 10px;
-    padding: 8px;
-  }
+.submenu li {
+  background-color: #2a2a2a;
+  padding: 8px 14px;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
 
-  #menu-container a {
-    padding: 8px 12px;
-    font-size: 0.95em;
-  }
-
-  .submenu li a {
-    padding-left: 20px;
-  }
+.submenu li:hover {
+  background-color: #444;
 }
