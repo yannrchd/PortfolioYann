@@ -18,7 +18,7 @@
   z-index: 999;
 }
 
-/* Menu caché au début */
+/* Menu caché au début  */
 .menu {
   display: none;
   flex-direction: column;
