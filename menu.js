@@ -1,12 +1,13 @@
 const menuContainer = document.getElementById('menu-container');
 
-// Création du bouton toggle
+// Toggle button
 const toggleButton = document.createElement('div');
 toggleButton.id = 'menu-toggle';
 toggleButton.textContent = '...';
 menuContainer.appendChild(toggleButton);
+console.log('Toggle button créé');
 
-// Menu principal
+// Menu data
 const menuData = [
   { name: 'Accueil', link: 'index.html' },
   {
@@ -19,7 +20,7 @@ const menuData = [
   },
   {
     name: 'Automobiles',
-    link: 'automobiles.html',
+    link: 'automobile.html',
     submenu: [
       { name: 'Japancar', link: 'japancar.html' },
       { name: 'Divers', link: 'divers.html' }
@@ -27,61 +28,68 @@ const menuData = [
   },
   {
     name: 'Concerts',
-    link: 'concerts.html',
+    link: 'concert.html',
     submenu: [
       { name: 'La Java', link: 'lajava.html' }
     ]
   }
 ];
 
-// Fonction pour créer les menus
+// Création menu
 function createMenu(data) {
   const ul = document.createElement('ul');
+  console.log('Création du menu principal');
 
   data.forEach(item => {
     const li = document.createElement('li');
     li.classList.add('menu-item');
 
-    const span = document.createElement('span');
+    const span = document.createElement('span'); // texte séparé
     span.textContent = item.name;
     li.appendChild(span);
 
+    li.dataset.link = item.link;
+
     if (item.submenu) {
+      console.log('Item a un sous-menu:', item.name);
+
       const submenuUl = document.createElement('ul');
       submenuUl.classList.add('submenu');
 
       item.submenu.forEach(sub => {
         const subLi = document.createElement('li');
         subLi.textContent = sub.name;
-        subLi.addEventListener('click', (e) => {
+        subLi.dataset.link = sub.link;
+
+        subLi.addEventListener('click', e => {
           e.stopPropagation();
+          console.log('Clic sur sous-menu:', sub.name);
           window.location.href = sub.link;
         });
+
         submenuUl.appendChild(subLi);
       });
 
       li.appendChild(submenuUl);
 
-      // Premier clic = afficher sous-menu, second clic = rediriger
-      li.addEventListener('click', (e) => {
+      // clic parent
+      li.addEventListener('click', e => {
         e.stopPropagation();
-
         const isOpen = li.classList.contains('open');
-        if (isOpen) {
-          window.location.href = item.link; // redirection si déjà ouvert
-        } else {
-          li.classList.add('open');
+        console.log('Clic sur parent:', item.name, 'isOpen:', isOpen);
 
-          // fermer les autres sous-menus
-          document.querySelectorAll('.menu-item').forEach(other => {
-            if (other !== li) {
-              other.classList.remove('open');
-            }
-          });
-        }
+        // fermer tous les autres
+        document.querySelectorAll('.menu-item').forEach(mi => {
+          if (mi !== li) mi.classList.remove('open');
+        });
+
+        // toggle le parent
+        if (!isOpen) li.classList.add('open');
+        else window.location.href = li.dataset.link;
       });
     } else {
       li.addEventListener('click', () => {
+        console.log('Redirection:', item.name);
         window.location.href = item.link;
       });
     }
@@ -92,17 +100,22 @@ function createMenu(data) {
   return ul;
 }
 
-// Crée le menu et l’ajoute
 const menuUl = createMenu(menuData);
 menuContainer.appendChild(menuUl);
+console.log('Menu ajouté au container');
 
-// Toggle menu principal
-toggleButton.addEventListener('click', (e) => {
+// Toggle menu
+toggleButton.addEventListener('click', e => {
   e.stopPropagation();
   menuContainer.classList.toggle('open');
+  console.log('Toggle menu:', menuContainer.classList.contains('open'));
+
+  if (!menuContainer.classList.contains('open')) {
+    document.querySelectorAll('.menu-item').forEach(li => li.classList.remove('open'));
+  }
 });
 
-// Fermer le menu si clic ailleurs
+// Fermer menu clic dehors
 document.addEventListener('click', () => {
   menuContainer.classList.remove('open');
   document.querySelectorAll('.menu-item').forEach(li => li.classList.remove('open'));

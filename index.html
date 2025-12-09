@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Index – Yann RICHARD</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="menu.css" />
 </head>
 <body>
-<div id="menu-container"></div>
+  <!-- Menu -->
+  <div id="menu-container"></div>
+
+  <!-- Header -->
   <header>
     <h1 class="site-title">Yann RICHARD</h1>
     <p class="subtitle">Cadreur • Photographe • Captation & Événementiel</p>
   </header>
+
+  <!-- À propos -->
   <section>
     <div class="about">
       <p>
@@ -24,19 +29,18 @@
     </div>
   </section>
 
-  <!-- SECTION CV VIDÉO -->
-<section>
-  <h2>CV Vidéo</h2>
-  <div class="video-container">
-    <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
-      <source src="videos/cvvideo.mp4" type="video/mp4" />
-      Votre navigateur ne supporte pas la lecture vidéo.
-    </video>
-  </div>
-</section>
+  <!-- CV Vidéo -->
+  <section>
+    <h2>CV Vidéo</h2>
+    <div class="video-container">
+      <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
+        <source src="videos/cvvideo.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture vidéo.
+      </video>
+    </div>
+  </section>
 
-
-
+  <!-- Catégories -->
   <section>
     <h2>Catégories</h2>
     <div class="categories">
@@ -57,6 +61,8 @@
       </div>
     </div>
   </section>
+
+  <!-- Services -->
   <section>
     <h2>Services</h2>
     <div class="services">
@@ -66,11 +72,23 @@
       <p><strong>Post-production :</strong> montage court, tri & retouche photo.</p>
     </div>
   </section>
-  <script src="keyboard-control.js"></script>
+
+  <!-- Footer -->
+  <footer id="footer-container"></footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="prevBtn" class="lightbox-btn">&#10094;</button>
+    <img src="" alt="Lightbox Image" />
+    <button id="nextBtn" class="lightbox-btn">&#10095;</button>
+  </div>
+
+  <!-- Scripts -->
   <script src="menu.js"></script>
   <script src="lightbox.js"></script>
   <script src="footer.js"></script>
   <script src="video-light.js"></script>
+  <script src="keyboard-control.js"></script>
   <script src="media-protect.js"></script>
 </body>
 </html>

@@ -1,11 +1,14 @@
+/* Container du menu */
 #menu-container {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 2000;
   font-family: "Inter", sans-serif;
+  display: inline-block; /* container s'adapte au toggle */
 }
 
+/* Bouton toggle "..." */
 #menu-toggle {
   width: 40px;
   height: 40px;
@@ -26,47 +29,56 @@
 }
 
 /* Menu principal */
-#menu-container ul {
+#menu-container > ul {
   display: none;
-  margin-top: 5px;
+  position: absolute; /* ne fait pas grandir le container */
+  top: 45px; /* juste en dessous du toggle */
+  left: 0;
   padding: 0;
   list-style: none;
   background-color: #1a1a1a;
   border-radius: 6px;
   min-width: 180px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
+/* Menu principal ouvert */
 #menu-container.open > ul {
   display: block;
 }
 
-.menu-item {
-  position: relative;
-  cursor: pointer;
+/* Items du menu et du sous-menu */
+#menu-container ul li {
   padding: 10px 16px;
   border-bottom: 1px solid #333;
+  cursor: pointer;
   color: #fff;
+  position: relative;
 }
 
-.menu-item span {
-  display: block;
-}
-
-.menu-item:hover {
+#menu-container ul li:hover {
   background-color: #333;
 }
 
+/* Sous-menu par défaut */
 .submenu {
-  display: none;
   list-style: none;
-  margin: 5px 0 5px 10px;
   padding: 0;
+  margin-left: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
+/* Sous-menu visible */
 .menu-item.open > .submenu {
+  max-height: 500px;
+  opacity: 1;
   display: block;
 }
 
+/* Items du sous-menu */
 .submenu li {
   background-color: #2a2a2a;
   padding: 8px 14px;
@@ -75,6 +87,8 @@
   cursor: pointer;
 }
 
+/* Survol des sous-menus */
 .submenu li:hover {
-  background-color: #444;
+  background-color: #3a3a3a; /* plus clair que le fond #2a2a2a, différent du parent */
 }
+
