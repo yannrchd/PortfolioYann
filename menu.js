@@ -23,7 +23,9 @@ const menuData = [
     link: 'automobile.html',
     submenu: [
       { name: 'Japancar', link: 'japancar.html' },
-      { name: 'Divers', link: 'diverscar.html' }
+      { name: 'Divers', link: 'diverscar.html' },
+      { name: 'GPexplorer', link: 'gpexplorer.html' }
+
     ]
   },
   {
