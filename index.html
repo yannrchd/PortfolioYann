@@ -6,6 +6,8 @@
   <title>Portfolio – Yann RICHARD</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="menu.css" />
+  <link rel="stylesheet" href="video-halo.css">
+
 </head>
 <body>
   <!-- Menu -->
@@ -32,12 +34,15 @@
   <!-- CV Vidéo -->
   <section>
     <h2>CV Vidéo</h2>
-    <div class="video-container">
-      <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
-        <source src="videos/cvvideo.mp4" type="video/mp4" />
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
-    </div>
+      <div class="video-container-wrapper">
+        <div class="video-container">
+          <div class="halo"></div> <!-- sous la vidéo -->
+            <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
+              <source src="videos/cvvideo.mp4" type="video/mp4" />
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+        </div>
+      </div>
   </section>
 
   <!-- Catégories -->
@@ -85,6 +90,7 @@
 
   <!-- Scripts -->
   <script src="menu.js"></script>
+  <script src="halo.js"></script>
   <script src="lightbox.js"></script>
   <script src="footer.js"></script>
   <script src="video-light.js"></script>
