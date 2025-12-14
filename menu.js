@@ -9,7 +9,7 @@ console.log('Toggle button créé');
 
 // Menu data
 const menuData = [
-  { name: 'Accueil', link: 'index.html' },
+  { name: 'Accueil', link: 'https://yannrchd.github.io/PortfolioYann/' },
   {
     name: 'Portraits',
     link: 'portraits.html',
