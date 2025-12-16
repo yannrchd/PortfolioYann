@@ -1,10 +1,20 @@
-// video-container.js
-// Cette fonction applique l'effet "playing" sur toutes les vidéos avec la classe "video-container"
+const videos = document.querySelectorAll('.video-container video');
 
-document.querySelectorAll('.video-container video').forEach(video => {
+videos.forEach(video => {
   const container = video.parentElement;
 
   video.addEventListener('play', () => {
+    // Stoppe toutes les autres vidéos
+    videos.forEach(v => {
+      const otherContainer = v.parentElement;
+
+      if (v !== video) {
+        v.pause();
+        otherContainer.classList.remove('playing');
+      }
+    });
+
+    // Active le halo sur la vidéo en cours
     container.classList.add('playing');
   });
 

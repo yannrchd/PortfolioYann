@@ -36,24 +36,30 @@
     <h2>CV Vidéo</h2>
       <div class="video-container-wrapper">
         <div class="video-container">
-          <div class="halo"></div> <!-- sous la vidéo -->
             <video id="cvvideo" controls preload="metadata" poster="photos/cover/cover-cv.jpg">
               <source src="videos/cvvideo.mp4" type="video/mp4" />
               Votre navigateur ne supporte pas la lecture vidéo.
             </video>
+                      <div class="halo"></div> <!-- sous la vidéo -->
+
         </div>
       </div>
-  </section>
+</section>
 
   <!-- Catégories -->
   <section>
     <h2>Catégories</h2>
     <div class="categories">
+      <div class="cat-card" onclick="window.location.href='video.html';">
+        <img src="photos/cover/video.jpg" alt="Vidéo" />
+        <div class="overlay"></div>
+        <div class="cat-name">Vidéo</div>
+      </div>    
       <div class="cat-card" onclick="window.location.href='portraits.html';">
         <img src="photos/cover/portrait-cover.jpg" alt="Portraits" />
         <div class="overlay"></div>
         <div class="cat-name">Portraits</div>
-      </div>
+      </div>  
       <div class="cat-card" onclick="window.location.href='automobile.html';">
         <img src="photos/cover/automobile-cover.jpg" alt="Automobile" />
         <div class="overlay"></div>

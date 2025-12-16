@@ -1,13 +1,17 @@
 document.addEventListener('keydown', (e) => {
-  // Bloquer défilement avec espace, flèche haut/bas
+  // Bloque le scroll
   if ([' ', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
     e.preventDefault();
   }
 
-  // Pause/play vidéo avec espace
-  const video = document.querySelector('video');
-  if (video && e.key === ' ') {
-    if (video.paused) video.play();
-    else video.pause();
+  // Barre espace = pause UNIQUEMENT
+  if (e.key === ' ') {
+    const videos = document.querySelectorAll('video');
+
+    videos.forEach(video => {
+      if (!video.paused) {
+        video.pause();
+      }
+    });
   }
 });

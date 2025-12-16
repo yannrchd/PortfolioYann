@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidéos Automobile – Yann RICHARD</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="menu.css" />
+  <link rel="stylesheet" href="video-halo.css" />
+</head>
+
+<body>
+
+  <!-- Menu -->
+  <div id="menu-container"></div>
+
+  <!-- Header -->
+  <header>
+    <h1 class="site-title">Automobile</h1>
+    <p class="subtitle">Captations & formats vidéo</p>
+  </header>
+
+  <!-- Section vidéos -->
+  <section>
+    <h2>Vidéos</h2>
+
+    <div class="videos-grid">
+
+      <!-- Vidéo 1 -->
+      <div class="video-item">
+        <div class="video-container video-strong">
+          <video controls preload="metadata" poster="photos/cover/e30sqy-cover.jpg">
+            <source src="videos/auto/e30sqy.mp4" type="video/mp4" />
+          </video>
+          <div class="halo"></div>    
+        </div>
+        <p class="video-title">E30 </p>
+      </div>
+
+      <!-- Vidéo 2 -->
+      <div class="video-item">
+        <div class="video-container video-strong">
+          <video controls preload="metadata" poster="photos/cover/sqylavage-cover.jpg">
+            <source src="videos/auto/sqylavage.mp4" type="video/mp4" />
+          </video>
+          <div class="halo"></div>
+        </div>
+        <p class="video-title">Teaser – Événement mécanique</p>
+      </div>
+
+      <!-- Vidéo 3 -->
+      <div class="video-item">
+        <div class="video-container video-strong" >
+          <video controls preload="metadata" poster="photos/cover/auto3.jpg">
+            <source src="videos/auto3.mp4" type="video/mp4" />
+          </video>
+          <div class="halo"></div>
+        </div>
+        <p class="video-title">Portrait automobile</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer-container"></footer>
+
+  <!-- Scripts -->
+  <script src="menu.js"></script>
+  <script src="halo.js"></script>
+  <script src="lightbox.js"></script>
+  <script src="footer.js"></script>
+  <script src="video-light.js"></script>
+  <script src="keyboard-control.js"></script>
+  <script src="media-protect.js"></script>
+  <script src="video-container.js"></script>
+</body>
+</html>
