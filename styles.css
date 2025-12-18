@@ -21,9 +21,32 @@ body {
 
 /* Header */
 header {
+  position: relative; /* pour placer la photo par rapport au header */
   padding: 100px 20px;
   text-align: center;
 }
+
+.header-photo {
+  position: absolute;
+  top: 50%;
+  right: 180px; /* ← augmente cette valeur pour aller plus à gauche */
+  transform: translateY(-50%);
+}
+
+.header-photo img {
+  width: 140px;              /* largeur contrôlée */
+  aspect-ratio: 9 / 16;      /* force le format vertical */
+  height: auto;
+  object-fit: cover;         /* recadrage propre */
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease;
+}
+
+.header-photo img:hover {
+  transform: scale(1.05);
+}
+
 h1.site-title {
   font-size: clamp(38px, 6vw, 60px);
   margin: 0;
@@ -180,3 +203,22 @@ footer {
 }
 #prevBtn { left: 20px; }
 #nextBtn { right: 20px; }
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 70px 20px 40px;
+  }
+
+  .header-photo {
+    position: static;        /* enlève le absolute */
+    transform: none;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-photo img {
+    width: 120px;            /* un peu plus discret sur mobile */
+  }
+}
