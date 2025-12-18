@@ -1,4 +1,9 @@
-/* styles.css - CSS commun pour le portfolio de Yann RICHARD */
+/* ================================
+   styles.css – Portfolio Yann RICHARD
+   Responsive global (desktop-first)
+   ================================ */
+
+/* ---------- Variables ---------- */
 :root {
   --bg: #0f0f0f;
   --card: #1a1a1a;
@@ -7,6 +12,7 @@
   --accent: #ffffff;
 }
 
+/* ---------- Reset ---------- */
 * {
   box-sizing: border-box;
 }
@@ -19,32 +25,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Header */
+/* ---------- Header ---------- */
 header {
-  position: relative; /* pour placer la photo par rapport au header */
+  position: relative;
   padding: 100px 20px;
   text-align: center;
-}
-
-.header-photo {
-  position: absolute;
-  top: 50%;
-  right: 180px; /* ← augmente cette valeur pour aller plus à gauche */
-  transform: translateY(-50%);
-}
-
-.header-photo img {
-  width: 140px;              /* largeur contrôlée */
-  aspect-ratio: 9 / 16;      /* force le format vertical */
-  height: auto;
-  object-fit: cover;         /* recadrage propre */
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
-  transition: transform 0.3s ease;
-}
-
-.header-photo img:hover {
-  transform: scale(1.05);
 }
 
 h1.site-title {
@@ -55,29 +40,54 @@ h1.site-title {
   transition: transform 0.3s ease;
   will-change: transform;
 }
+
 h1.site-title:hover {
   transform: scale(1.1);
 }
+
 p.subtitle {
   margin-top: 10px;
   font-size: clamp(16px, 3vw, 22px);
   color: var(--sub);
 }
 
-/* Sections */
+/* Photo header */
+.header-photo {
+  position: absolute;
+  top: 50%;
+  right: 180px;
+  transform: translateY(-50%);
+}
+
+.header-photo img {
+  width: 140px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+  transition: transform 0.3s ease;
+}
+
+.header-photo img:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- Sections ---------- */
 section {
   max-width: 1300px;
   margin: 70px auto;
   padding: 0 20px;
 }
+
 h2 {
   font-size: clamp(26px, 3.5vw, 34px);
   margin-bottom: 25px;
   font-weight: 700;
 }
 
-/* About & Services Cards */
-.about, .services {
+/* About & Services */
+.about,
+.services {
   background: var(--card);
   padding: 30px;
   border-radius: 16px;
@@ -86,17 +96,20 @@ h2 {
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
-.about:hover, .services:hover {
+
+.about:hover,
+.services:hover {
   transform: scale(1.02);
 }
 
-/* Catégories */
+/* ---------- Catégories ---------- */
 .categories {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
 }
+
 .cat-card {
   position: relative;
   border-radius: 16px;
@@ -108,13 +121,13 @@ h2 {
   display: flex;
   align-items: flex-end;
   transition: transform 0.3s ease;
-  text-decoration: none;
-  color: inherit;
 }
+
 .cat-card:hover {
   transform: scale(1.02);
   box-shadow: 0 0 30px 1px #073997;
 }
+
 .cat-card img {
   position: absolute;
   inset: 0;
@@ -122,11 +135,17 @@ h2 {
   height: 100%;
   object-fit: cover;
 }
+
 .cat-card .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8));
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,0.8)
+  );
 }
+
 .cat-name {
   position: relative;
   padding: 20px;
@@ -135,12 +154,13 @@ h2 {
   z-index: 2;
 }
 
-/* Galerie - images format portrait 4:5 */
+/* ---------- Galeries ---------- */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
+
 .gallery img {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -148,34 +168,37 @@ h2 {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
+
 .gallery img:hover {
   transform: scale(1.05);
   box-shadow: 0 0 30px 1px #073997;
 }
 
-/* Footer */
+/* ---------- Vidéo ---------- */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Footer ---------- */
 footer {
   text-align: center;
   padding: 60px;
   color: var(--sub);
 }
 
-/* Lightbox */
+/* ---------- Lightbox ---------- */
 #lightbox {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.8);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
+
 #lightbox img {
   max-width: 80%;
   max-height: 80%;
@@ -184,10 +207,12 @@ footer {
   transform: scale(0.95);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 #lightbox img.show {
   opacity: 1;
   transform: scale(1);
 }
+
 .lightbox-btn {
   position: absolute;
   top: 50%;
@@ -201,17 +226,33 @@ footer {
   z-index: 1001;
   border-radius: 6px;
 }
+
 #prevBtn { left: 20px; }
 #nextBtn { right: 20px; }
 
-@media (max-width: 768px) {
+/* =================================================
+   RESPONSIVE GLOBAL
+   ================================================= */
 
+/* ----- Tablette ----- */
+@media (max-width: 1024px) {
+  .header-photo {
+    right: 80px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ----- Mobile ----- */
+@media (max-width: 768px) {
   header {
     padding: 70px 20px 40px;
   }
 
   .header-photo {
-    position: static;        /* enlève le absolute */
+    position: static;
     transform: none;
     margin-top: 30px;
     display: flex;
@@ -219,16 +260,50 @@ footer {
   }
 
   .header-photo img {
-    width: 120px;            /* un peu plus discret sur mobile */
+    width: 120px;
+  }
+
+  section {
+    margin: 50px auto;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .about,
+  .services {
+    font-size: 16px;
+    padding: 24px;
+  }
+
+  .categories {
+    gap: 16px;
+  }
+
+  .cat-card {
+    width: 45%;
+    height: 260px;
   }
 
   .gallery {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
+  footer {
+    padding: 40px 20px;
+    font-size: 14px;
+  }
 }
 
+/* ----- Petit mobile ----- */
 @media (max-width: 480px) {
+  .cat-card {
+    width: 100%;
+    height: 220px;
+  }
+
   .gallery {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
