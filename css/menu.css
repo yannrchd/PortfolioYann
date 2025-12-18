@@ -5,7 +5,7 @@
   left: 20px;
   z-index: 2000;
   font-family: "Inter", sans-serif;
-  display: inline-block; /* container s'adapte au toggle */
+  display: inline-block;
 }
 
 /* Bouton toggle "..." */
@@ -21,18 +21,19 @@
   cursor: pointer;
   font-weight: bold;
   font-size: 18px;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 
 #menu-toggle:hover {
   background-color: #333;
+  transform: scale(1.05);
 }
 
 /* Menu principal */
 #menu-container > ul {
-  display: none;
-  position: absolute; /* ne fait pas grandir le container */
-  top: 45px; /* juste en dessous du toggle */
+  display: block; /* pour permettre transition */
+  position: absolute;
+  top: 45px;
   left: 0;
   padding: 0;
   list-style: none;
@@ -40,11 +41,18 @@
   border-radius: 6px;
   min-width: 180px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+
+  /* Fluidité */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
 /* Menu principal ouvert */
 #menu-container.open > ul {
-  display: block;
+  max-height: 1000px; /* assez grand pour tout le menu */
+  opacity: 1;
 }
 
 /* Items du menu et du sous-menu */
@@ -54,6 +62,7 @@
   cursor: pointer;
   color: #fff;
   position: relative;
+  transition: background 0.3s;
 }
 
 #menu-container ul li:hover {
@@ -67,14 +76,16 @@
   margin-left: 15px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
   opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
 }
 
 /* Sous-menu visible */
 .menu-item.open > .submenu {
   max-height: 500px;
   opacity: 1;
+  transform: translateY(0);
   display: block;
 }
 
@@ -85,10 +96,10 @@
   border-radius: 6px;
   margin-bottom: 2px;
   cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Survol des sous-menus */
 .submenu li:hover {
-  background-color: #3a3a3a; /* plus clair que le fond #2a2a2a, différent du parent */
+  background-color: #3a3a3a;
+  transform: translateX(3px);
 }
-

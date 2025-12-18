@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const elapsed = (timestamp - startTime) / 1500;
 
     // Intensité pulsante
-    const intensity = 0.3 + 0.2 * Math.sin(elapsed * 2 * Math.PI);
+    const intensity = 0.3 + 10 * Math.sin(elapsed * 2 * Math.PI);
     const blur = 50 + intensity * 100; // blur variable
     const spread = 0.2 + intensity ; // spread variable
     const alpha = 0.5 + intensity * 0.5; // alpha variable
