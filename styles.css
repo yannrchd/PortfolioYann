@@ -221,4 +221,16 @@ footer {
   .header-photo img {
     width: 120px;            /* un peu plus discret sur mobile */
   }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
 }
