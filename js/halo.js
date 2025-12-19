@@ -1,48 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const video = document.getElementById('cvvideo');
-  const halo = document.querySelector('.halo');
+// halo.js
 
-  if (!video || !halo) {
-    console.error("Élément manquant : vérifie que #cvvideo et .halo existent.");
-    return;
-  }
+function initHalo() {
+  function attachHalo(video) {
+    if (!video) return;
 
-  let pulseId;
-  let startTime;
+    const container = video.parentElement;
 
-  function pulse(timestamp) {
-    if (!startTime) startTime = timestamp;
-    const elapsed = (timestamp - startTime) / 1500;
+    // Créer le halo si inexistant
+    let halo = container.querySelector('.halo');
+    if (!halo) {
+      halo = document.createElement('div');
+      halo.className = 'halo';
+      container.appendChild(halo);
+    }
 
-    // Intensité pulsante
-    const intensity = 0.3 + 10 * Math.sin(elapsed * 2 * Math.PI);
-    const blur = 50 + intensity * 100; // blur variable
-    const spread = 0.2 + intensity ; // spread variable
-    const alpha = 0.5 + intensity * 0.5; // alpha variable
+    let pulseId;
+    let startTime;
 
-    halo.style.boxShadow = `0 0 ${blur}px ${spread}px rgba(255,0,0,${alpha})`;
+    function pulse(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = (timestamp - startTime) / 1500;
 
-    // Debug
-    console.log(`Halo pulse → blur: ${blur.toFixed(0)}, spread: ${spread.toFixed(0)}, alpha: ${alpha.toFixed(2)}`);
+      const intensity = 0.1 + 0.05 * Math.sin(elapsed * 2 * Math.PI);
 
-    pulseId = requestAnimationFrame(pulse);
-  }
+      halo.style.opacity = 0.15 + intensity;
+      halo.style.filter = `blur(${20 + intensity * 10}px)`;
 
-  video.addEventListener('play', () => {
-    halo.parentElement.classList.add('playing');
-    if (!pulseId) {
-      startTime = null;
+      console.log(`Halo video: ${video.currentSrc.split('/').pop()} → opacity: ${halo.style.opacity}, blur: ${20 + intensity * 10}px`);
+
       pulseId = requestAnimationFrame(pulse);
     }
-  });
 
-  function stopHalo() {
-    halo.parentElement.classList.remove('playing');
-    cancelAnimationFrame(pulseId);
-    pulseId = null;
-    halo.style.boxShadow = 'none'; // Halo complètement disparu
+    function startHalo() {
+      container.classList.add('playing');
+      if (!pulseId) {
+        startTime = null;
+        pulseId = requestAnimationFrame(pulse);
+      }
+    }
+
+    function stopHalo() {
+      container.classList.remove('playing');
+      cancelAnimationFrame(pulseId);
+      pulseId = null;
+      halo.style.opacity = 0;
+      halo.style.filter = 'blur(20px)';
+    }
+
+    video.addEventListener('play', startHalo);
+    video.addEventListener('pause', stopHalo);
+    video.addEventListener('ended', stopHalo);
   }
 
-  video.addEventListener('pause', stopHalo);
-  video.addEventListener('ended', stopHalo);
-});
+  // Appliquer aux vidéos existantes
+  document.querySelectorAll('.video-container video').forEach(attachHalo);
+
+  // Observer les vidéos ajoutées dynamiquement
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1) {
+          if (node.matches('.video-container video')) attachHalo(node);
+          node.querySelectorAll?.('.video-container video').forEach(attachHalo);
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+// Appel direct pour s'assurer que ça s'exécute même avec main.js dynamique
+initHalo();

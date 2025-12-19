@@ -1,104 +1,130 @@
 /* ============================
-   CONTENEUR VIDÉO
+   WRAPPER GLOBAL VIDÉO
 ============================ */
 
 .video-container-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
-  margin-top: 12px;
-  font-size: 0.95rem;
-  opacity: 0.8;
+  margin: 32px auto;
 }
+
+/* ============================
+   CONTENEUR VIDÉO
+============================ */
 
 .video-container {
+  position: relative;
   display: block;
-  margin: 40px auto;
-  border-radius: 12px;
-  overflow: visible; /* pour que le halo dépasse */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; /* nécessaire pour que halo soit positionné derrière */
+  margin: 0 auto;
+
+  /* Empêche le halo d'interférer avec le reste de la page */
+  isolation: isolate;
 }
 
-.video-container.playing {
-  transform: scale(1.02);
-  z-index: 1; /* halo reste derrière la vidéo */
-}
+/* ============================
+   VIDÉO
+============================ */
 
-/* Vidéo */
 .video-container video {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   max-width: 800px;
   border-radius: 12px;
-  position: relative;
-  z-index: 2; /* toujours au-dessus du halo */
 }
 
 /* ============================
-   HALO
+   HALO (FORME ÉCRAN)
 ============================ */
 
 .video-container .halo {
   position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 0, 0, 0.35),
-    rgba(255, 0, 0, 0) 70%
-  );
+
+  /* Diffusion contrôlée autour du cadre */
+  inset: -18px;
+
   pointer-events: none;
-  z-index: 1; /* derrière la vidéo */
+  z-index: -5;
+
+  /* 🔑 FORME = VIDÉO */
+  border-radius: 16px;
+
+  /* Ambilight = diffusion depuis les bords */
+  background:
+    linear-gradient(to top,
+      rgba(255, 0, 0, 0.35),
+      rgba(255, 0, 0, 0) 60%
+    ),
+    linear-gradient(to bottom,
+      rgba(255, 0, 0, 0.35),
+      rgba(255, 0, 0, 0) 60%
+    ),
+    linear-gradient(to left,
+      rgba(255, 0, 0, 0.35),
+      rgba(255, 0, 0, 0) 60%
+    ),
+    linear-gradient(to right,
+      rgba(255, 0, 0, 0.35),
+      rgba(255, 0, 0, 0) 60%
+    );
+
+  filter: blur(22px);
+
+  /* Invisible à l’arrêt */
   opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  filter: blur(25px); /* ajustable pour “taille” du halo */
-}
 
-/* Halo actif uniquement sur lecture */
-.video-container.playing .halo {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Halo renforcé pour certaines vidéos */
-.video-container.video-strong.playing .halo {
-  opacity: 10;              /* plus visible */
-  transform: scale(1.05);  /* légèrement plus grand */
-  filter: blur(40px);      /* halo plus intense */
+  transition: opacity 0.4s ease;
 }
 
 /* ============================
-   GRILLE MULTI-VIDÉOS
+   HALO ACTIF
 ============================ */
 
+.video-container.playing {
+  opacity: 1;
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  
+}
+
+
+
+/* ============================
+   GRILLE MULTI VIDÉOS
+============================ */
+
+/* Grille multi-vidéos */
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
+  gap: 48px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.video-item {
-  text-align: center;
+/* Si une seule vidéo dans la grille, centrer */
+.videos-grid > .video-item:only-child {
+  justify-self: center;
 }
 
+/* Texte centré sous la vidéo */
 .video-title {
   margin-top: 12px;
   font-size: 0.95rem;
-  opacity: 0.8;
+  opacity: 0.75;
+  text-align: center;
 }
+
 
 /* ============================
    RESPONSIVE
 ============================ */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .video-container .halo {
-    inset: -15px;
-    filter: blur(25px);
+    inset: -16px;
+    filter: blur(18px);
   }
 }

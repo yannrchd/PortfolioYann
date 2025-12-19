@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "js/media-protect.js",
     "js/menu.js",
     "js/video-container.js",
-    "js/video-light.js"
+    "js/video-light.js",
+    "js/pic-animated.js"
   ];
 
   // Fonction pour injecter dynamiquement les scripts

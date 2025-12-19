@@ -179,7 +179,27 @@ h2 {
 video {
   max-width: 100%;
   height: auto;
+  position: center;
 }
+
+.video-item::after {
+  content: "© Yann Richard";
+  display: block;           
+  text-align: center;       
+  margin-top: 8px;          
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  pointer-events: none;
+}
+
+.aftermovie-cover img,
+.aftermovie-cover video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px; /* si tu veux la même bordure que les autres cartes */
+}
+
 
 /* ---------- Footer ---------- */
 footer {
@@ -235,7 +255,7 @@ footer {
    ================================================= */
 
 /* ----- Tablette ----- */
-@media (max-width: 1024px) {
+@media (max-width: 1212px) {
   .header-photo {
     right: 80px;
   }
@@ -243,10 +263,15 @@ footer {
   .gallery {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .video-item::after {
+    font-size: 13px;
+    margin-top: 6px;
+  }
 }
 
 /* ----- Mobile ----- */
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   header {
     padding: 70px 20px 40px;
   }
@@ -291,6 +316,11 @@ footer {
     gap: 12px;
   }
 
+  .video-item::after {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
   footer {
     padding: 40px 20px;
     font-size: 14px;
@@ -308,6 +338,11 @@ footer {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
+
+  .video-item::after {
+    font-size: 10px;
+    margin-top: 4px;
+  }  
 }
 
 /* surface */
