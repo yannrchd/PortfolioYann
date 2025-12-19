@@ -1,57 +1,20 @@
-/* ============================
-   WRAPPER GLOBAL VIDÉO
-============================ */
+/* =================================================
+   VIDEO HALO
+   Effet visuel & animation uniquement
+   ================================================= */
 
-.video-container-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 32px auto;
-}
 
-/* ============================
-   CONTENEUR VIDÉO
-============================ */
-
-.video-container {
-  position: relative;
-  display: block;
-  margin: 0 auto;
-
-  /* Empêche le halo d'interférer avec le reste de la page */
-  isolation: isolate;
-}
-
-/* ============================
-   VIDÉO
-============================ */
-
-.video-container video {
-  position: relative;
-  z-index: 2;
-  display: block;
-  width: 100%;
-  max-width: 800px;
-  border-radius: 12px;
-}
-
-/* ============================
-   HALO (FORME ÉCRAN)
-============================ */
-
+/* =========================
+   HALO
+========================= */
 .video-container .halo {
   position: absolute;
-
-  /* Diffusion contrôlée autour du cadre */
   inset: -18px;
-
-  pointer-events: none;
   z-index: -5;
+  pointer-events: none;
 
-  /* 🔑 FORME = VIDÉO */
   border-radius: 16px;
 
-  /* Ambilight = diffusion depuis les bords */
   background:
     linear-gradient(to top,
       rgba(255, 0, 0, 0.35),
@@ -71,31 +34,25 @@
     );
 
   filter: blur(22px);
-
-  /* Invisible à l’arrêt */
   opacity: 0;
-
   transition: opacity 0.4s ease;
 }
 
-/* ============================
-   HALO ACTIF
-============================ */
 
+/* =========================
+   ÉTAT ACTIF (LECTURE)
+========================= */
 .video-container.playing {
   opacity: 1;
   transform: scale(1.10);
-  transition: transform 0.6s ease;
-  
+  transform-origin: center center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
 }
 
 
-
-/* ============================
-   GRILLE MULTI VIDÉOS
-============================ */
-
-/* Grille multi-vidéos */
+/* =========================
+   GRILLE VIDÉOS (FEATURE)
+========================= */
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -104,12 +61,10 @@
   margin: 0 auto;
 }
 
-/* Si une seule vidéo dans la grille, centrer */
 .videos-grid > .video-item:only-child {
   justify-self: center;
 }
 
-/* Texte centré sous la vidéo */
 .video-title {
   margin-top: 12px;
   font-size: 0.95rem;
@@ -118,13 +73,30 @@
 }
 
 
-/* ============================
-   RESPONSIVE
-============================ */
+/* =========================
+   RESPONSIVE HALO & SCALE
+========================= */
 
-@media (max-width: 768px) {
+/* Tablette */
+@media (max-width: 980px) {
   .video-container .halo {
     inset: -16px;
     filter: blur(18px);
+  }
+
+  .video-container.playing {
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .video-container .halo {
+    inset: -14px;
+    filter: blur(16px);
+  }
+
+  .video-container.playing {
+    transform: scale(1.03);
   }
 }
