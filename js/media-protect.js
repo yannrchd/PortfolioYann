@@ -1,43 +1,43 @@
 // media-protect.js
-document.addEventListener('DOMContentLoaded', () => {
+window.initMediaProtect = function() {
+    console.log("💡 Media Protect script exécuté.");
 
-  function protectMedia(element) {
-    // Bloque clic droit
-    element.addEventListener('contextmenu', e => e.preventDefault());
-
-    // Bloque glisser-déposer
-    element.addEventListener('dragstart', e => e.preventDefault());
-
-    // Empêche le clic milieu (ouvrir dans un nouvel onglet)
-    element.addEventListener('mousedown', e => {
-      if (e.button === 1) e.preventDefault();
+    // Désactiver le clic droit sur tout le document
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        console.log("❌ Clic droit désactivé sur :", e.target);
     });
 
-    // Empêche l'ouverture directe sur les vidéos
-    element.addEventListener('click', e => {
-      if (element.tagName === 'VIDEO') e.preventDefault();
+    // Sélection de toutes les images et vidéos
+    const media = document.querySelectorAll('img, video');
+    console.log("Nombre de médias protégés :", media.length);
+
+    media.forEach(el => {
+        el.setAttribute('draggable', 'false');
+        console.log("🚫 Draggable désactivé pour :", el);
+
+        // Empêcher d'ouvrir dans un nouvel onglet ou clic milieu
+        el.addEventListener('mousedown', (e) => {
+            if (e.button === 1 || e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                console.log(`❌ Clic milieu ou Ctrl/Cmd détecté sur :`, el);
+            }
+        });
+
+        // Masquer l'URL réelle pour certains navigateurs (clic droit spécifique)
+        el.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            console.log("❌ Clic droit sur média désactivé :", el);
+        });
     });
 
-    // Optionnel : désactive la sélection de texte autour de l'image/vidéo
-    element.style.userSelect = 'none';
-  }
-
-  // Bloque toutes les images et vidéos déjà présentes
-  const mediaElements = document.querySelectorAll('img, video');
-  mediaElements.forEach(protectMedia);
-
-  // Observer le DOM pour bloquer les nouveaux médias ajoutés dynamiquement
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType === 1) { // Element
-          if (node.matches('img, video')) protectMedia(node);
-          node.querySelectorAll?.('img, video').forEach(protectMedia);
+    // Désactiver certaines touches pour éviter les captures rapides
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+            e.preventDefault();
+            console.log("❌ Tentative de Ctrl+S ou Cmd+S détectée et bloquée");
         }
-      });
     });
-  });
 
-  observer.observe(document.body, { childList: true, subtree: true });
-
-});
+    console.log("✅ Media Protect initialisé !");
+};

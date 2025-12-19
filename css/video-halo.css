@@ -84,8 +84,8 @@
 
 .video-container.playing {
   opacity: 1;
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
+  transform: scale(1.10);
+  transition: transform 0.6s ease;
   
 }
 

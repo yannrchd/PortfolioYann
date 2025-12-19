@@ -1,68 +1,89 @@
-document.addEventListener('DOMContentLoaded', () => {
+// lightbox.js
+window.initLightbox = function() {
   const lightbox = document.getElementById('lightbox');
-  if (!lightbox) return console.warn("Lightbox non présent sur cette page.");
-
   const galleryItems = document.querySelectorAll('.gallery-item');
-  if (!galleryItems.length) return; // Pas d'images, exit
-
   const lightboxImg = lightbox.querySelector('img');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  if (!lightboxImg || !prevBtn || !nextBtn) {
-    console.warn("Certains éléments du lightbox sont manquants.");
+  console.log("💡 Lightbox script exécuté.");
+  console.log("Lightbox element:", lightbox);
+  console.log("Nombre de gallery items:", galleryItems.length);
+  console.log("Prev button:", prevBtn);
+  console.log("Next button:", nextBtn);
+  console.log("Lightbox image:", lightboxImg);
+
+  if (!lightbox || galleryItems.length === 0 || !lightboxImg || !prevBtn || !nextBtn) {
+    console.warn("⚠️ Lightbox : éléments manquants, initialisation annulée.");
     return;
   }
 
   let currentIndex = 0;
 
-  function openLightbox(src) {
-    const index = Array.from(galleryItems).findIndex(item => item.dataset.src === src);
-    if (index === -1) return; // image non trouvée
-    currentIndex = index;
-    updateLightbox();
-    lightbox.style.display = 'flex';
-  }
-
-  function closeLightbox() {
-    lightbox.style.display = 'none';
-  }
-
   function updateLightbox() {
+    console.log(`🔄 updateLightbox → index actuel: ${currentIndex}`);
     lightboxImg.classList.remove('show');
     setTimeout(() => {
       lightboxImg.src = galleryItems[currentIndex].dataset.src;
-      void lightboxImg.offsetWidth; // forcer reflow
+      void lightboxImg.offsetWidth;
       lightboxImg.classList.add('show');
-      console.log("Lightbox → affichage image index:", currentIndex, lightboxImg.src);
-    }, 150);
+      console.log(`📸 Image affichée: ${lightboxImg.src}`);
+    }, 50);
   }
 
-  function prevImage(e) {
-    e.stopPropagation();
+  function openLightbox(index) {
+    console.log(`🟢 openLightbox → index: ${index}`);
+    currentIndex = index;
+    lightbox.classList.add('show');
+    console.log("💡 Lightbox ouvert.");
+    updateLightbox();
+  }
+
+  function closeLightbox() {
+    console.log("🔴 closeLightbox → Lightbox fermé.");
+    lightbox.classList.remove('show');
+  }
+
+  function prevImage() {
     currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    console.log(`⬅️ prevImage → nouvel index: ${currentIndex}`);
     updateLightbox();
   }
 
-  function nextImage(e) {
-    e.stopPropagation();
+  function nextImage() {
     currentIndex = (currentIndex + 1) % galleryItems.length;
+    console.log(`➡️ nextImage → nouvel index: ${currentIndex}`);
     updateLightbox();
   }
 
-  // Events
-  galleryItems.forEach(item => {
-    item.addEventListener('click', () => openLightbox(item.dataset.src));
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      console.log(`🖱 gallery item cliqué → index: ${index}`);
+      openLightbox(index);
+    });
   });
 
-  prevBtn.addEventListener('click', prevImage);
-  nextBtn.addEventListener('click', nextImage);
-  lightbox.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', e => { 
+    e.stopPropagation(); 
+    prevImage(); 
+  });
+
+  nextBtn.addEventListener('click', e => { 
+    e.stopPropagation(); 
+    nextImage(); 
+  });
+
+  lightbox.addEventListener('click', () => {
+    console.log("🖱 clic en dehors de l'image → fermeture du lightbox");
+    closeLightbox();
+  });
 
   document.addEventListener('keydown', e => {
-    if (lightbox.style.display !== 'flex') return;
-    if (e.key === 'ArrowLeft') prevImage(e);
-    else if (e.key === 'ArrowRight') nextImage(e);
-    else if (e.key === 'Escape') closeLightbox();
+    if (!lightbox.classList.contains('show')) return;
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'Escape') closeLightbox();
   });
-});
+
+  console.log("✅ Lightbox initialisé via main.js !");
+};
