@@ -3,35 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>institutionnel – Yann RICHARD</title>
+  <title>Films Institutionnel – Yann RICHARD</title>
+
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/menu.css" />
-  <link rel="stylesheet" href="css/video-halo.css">
+  <link rel="stylesheet" href="css/video-halo.css" />
 </head>
+
 <body>
-<div id="menu-container"></div>
+
+  <!-- Menu -->
+  <div id="menu-container"></div>
+
+  <!-- Header -->
   <header>
-    <h1 class="site-title">Institutionnel</h1>
-    <p class="subtitle">Découvrez mes différents films institutionnel</p>
+    <h1 class="site-title">Films Institutionnels</h1>
+    <p class="subtitle">Corporate</p>
   </header>
 
+  <!-- Section vidéos -->
   <section>
-    <h2>Mes vidéos</h2>
-    <div class="categories">
-      <div class="cat-card" onclick="window.location.href='videoauto.html';">
-        <img src="photos/cover/videoauto.jpg" alt="Videoautomobile" />
-        <div class="overlay"></div>
-        <div class="cat-name">Vidéo Automobile</div>
+    <h2>Vidéos</h2>
+
+    <div class="videos-grid">
+
+      <!-- Vidéo 1 -->
+      <div class="video-item">
+        <div class="video-container">
+          <video controls preload="metadata" poster="photos/cover/obscuraAfterM1.jpg">
+            <source src="videos/corpo/aumaxdessaveurs.mp4" type="video/mp4" />
+          </video>
+          <div class="halo"></div>    
+        </div><br>
+        <p class="video-title">Au Max Des Saveurs</p>
       </div>
-      <div class="cat-card aftermovie-cover" data-video-src="videos/aftermovies.mp4" onclick="window.location.href='aftermovies.html';">
-        <img src="photos/cover/aftermovies-cover.jpg" alt="Aftermovies" />
-        <div class="overlay"></div>
-        <div class="cat-name">After Movies</div>
-      </div>
+
+
     </div>
   </section>
-  <footer id="footer-container"></footer>
-  <script src="js/main.js"></script>
 
+  <!-- Footer -->
+  <footer id="footer-container"></footer>
+
+  <!-- Scripts -->
+<script src="js/main.js"></script>
 </body>
 </html>
